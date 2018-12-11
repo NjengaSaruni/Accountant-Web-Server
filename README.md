@@ -6,6 +6,7 @@ This repository contains the backend for the AccountantPlus web service.
 1. ### Without docker (Linux | Ubuntu)
 
      
+     
      $ git clone https://github.com/NjengaSaruni/Accountant-Web-Server.git
      $ cd Accountant-Web-Server
      
