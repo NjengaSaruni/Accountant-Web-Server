@@ -71,3 +71,6 @@ fabric.properties
 
 # SQLite
 *.sqlite3
+
+# Local environment
+venv/
