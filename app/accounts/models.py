@@ -25,7 +25,8 @@ class User(AbstractUser):
         if self.phone_number is not None and not self.phone_number.is_valid():
             raise ValidationError(_('Invalid phone number.'))
 
-        validate_email(self.email)
+        if self.email:
+            validate_email(self.email)
 
         return super(User, self).save()
 

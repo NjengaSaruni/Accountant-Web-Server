@@ -124,6 +124,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Cross origin requests
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
+
 # User model
 # https://wsvincent.com/django-rest-framework-user-authentication-tutorial/
 
