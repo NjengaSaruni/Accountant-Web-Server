@@ -77,3 +77,6 @@ venv/
 
 # Unnecessary .pyc file
 *.pyc
+
+#Testing and coverage stuff
+.coverage
