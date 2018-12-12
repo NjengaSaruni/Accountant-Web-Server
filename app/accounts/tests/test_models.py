@@ -3,7 +3,7 @@ from django.test import TestCase
 from app.accounts.models import User
 
 
-class UserTestCase(TestCase):
+class UserModelTestCase(TestCase):
     def setUp(self):
         User.objects.create(first_name='James', last_name='Njenga', password='this!@#', email='jamesnjenga@gmail.com')
         User.objects.create(first_name='Agnes', last_name='Nzani', password='this!@#', email='agnesnzani@gmail.com')
@@ -41,7 +41,6 @@ class UserTestCase(TestCase):
         james = User.objects.get(email='jamesnjenga@gmail.com')
         james.email = 'jamesnjenga1@gmail.com'
         james.save()
-
         self.assertEqual(james.email, 'jamesnjenga1@gmail.com')
 
     def test_user_invalid_mail(self):
