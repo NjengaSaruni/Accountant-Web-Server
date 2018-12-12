@@ -12,6 +12,7 @@
 .idea/**/contentModel.xml
 
 # Sensitive or high-churn files
+.idea/
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
@@ -64,3 +65,15 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+# Local environment variables file
+.env
+
+# SQLite
+*.sqlite3
+
+# Local environment
+venv/
+
+# Unnecessary .pyc file
+*.pyc
