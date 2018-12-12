@@ -5,11 +5,12 @@ This repository contains the backend for the AccountantPlus web service.
 ## How to run the server
 1. ### Without docker (Linux | Ubuntu)
 
-     
+
      
      $ git clone https://github.com/NjengaSaruni/Accountant-Web-Server.git
-     $ cd Accountant-Web-Server
-     
+    
+     $ cd Accountant-Web-Server    
+    
  If you do not have python and pip installed:
  
      $ sudo apt-get install python3 python3-pip virtualenvwrapper
@@ -27,18 +28,20 @@ This repository contains the backend for the AccountantPlus web service.
      
      $ sudo apt-get install postgresql postgresql-contrib
      
- Add a database to your Postgres using. You may use `psql` as follows:
+ Add a database to your Postgres server instance. You may use `psql` as follows:
  
-     $ sudo -su postgres psql postgres
- 
- This will open an interactive terminal, where you can create a database, and a role
-    
-     > CREATE DATABASE <your_db_name>;
-     > CREATE ROLE <your_user> LOGIN PASSWORD '<your_password>';
-     > GRANT ALL PRIVILEGES ON DATABASE <your_db_name> TO <your_user>;
-     > \q
- 
- Copy the values of the `.sample_env` file into a new `.env` file
+         $ sudo -su postgres psql postgres
+     
+         # This will open an interactive terminal, where you can create a database, and a role. For tests, give your use the create db privilege
+        
+         > CREATE DATABASE <your_db_name>;
+         > CREATE ROLE <your_user> LOGIN PASSWORD '<your_password>';
+         > GRANT ALL PRIVILEGES ON DATABASE <your_db_name> TO <your_user>;
+         > ALTER USER <your_user> CREATEDB;
+         > \q
+     
+
+ Copy the values of the `.sample_env` file in the root folder into a new `.env` file
       
      $ cat .sample_env >> .env
      
@@ -48,4 +51,4 @@ This repository contains the backend for the AccountantPlus web service.
      $ ./manage.py createsuperuser
      $ ./manage.py runserver
      
- Maintained by [Peter](https://twitter.com/NjengaSaruni)
+ Maintained by [Peter Njenga](https://twitter.com/NjengaSaruni)

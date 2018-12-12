@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.utils import timezone
 
 
 class User(AbstractUser):
@@ -10,6 +11,15 @@ class User(AbstractUser):
     phone_number = PhoneNumberField(null=True, blank=True)
     created_at = models.DateTimeField(auto_created=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.created_at:
+            self.created_at = timezone.now()
+        if not self.updated_at:
+            self.updated_at = timezone.now()
+        if not self.username:
+            self.username = self.email
+        return super(User, self).save()
 
     @property
     def full_name(self):
