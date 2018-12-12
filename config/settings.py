@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'allauth',
     'allauth.account',
+    'phonenumber_field',
+
+
+    # Local apps
     'app.accounts.apps.AccountantApiConfig',
     'app.api',
 ]
