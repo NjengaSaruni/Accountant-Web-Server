@@ -1,7 +1,10 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import validate_email
 
 
 class User(AbstractUser):
@@ -19,6 +22,11 @@ class User(AbstractUser):
             self.updated_at = timezone.now()
         if not self.username:
             self.username = self.email
+        if self.phone_number is not None and not self.phone_number.is_valid():
+            raise ValidationError(_('Invalid phone number.'))
+
+        validate_email(self.email)
+
         return super(User, self).save()
 
     @property
@@ -26,4 +34,4 @@ class User(AbstractUser):
         return self.get_full_name()
 
     def __str__(self):
-        return self.email
+        return '%s %s - %s' % (self.first_name, self.last_name, self.email)
