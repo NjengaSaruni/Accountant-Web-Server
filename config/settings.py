@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'phonenumber_field',
-
+    'corsheaders',
 
     # Local apps
     'app.accounts.apps.AccountantApiConfig',
@@ -60,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -126,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Cross origin requests
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
-
+CORS_ORIGIN_ALLOW_ALL = True
 # User model
 # https://wsvincent.com/django-rest-framework-user-authentication-tutorial/
 
