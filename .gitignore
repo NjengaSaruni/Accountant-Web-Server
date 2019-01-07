@@ -80,3 +80,5 @@ venv/
 
 #Testing and coverage stuff
 .coverage
+
+static/
