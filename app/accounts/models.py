@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -8,6 +10,7 @@ from django.core.validators import validate_email
 
 
 class User(AbstractUser):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=255)
     middle_name = models.CharField(null=True, blank=True, max_length=255)
     last_name = models.CharField(max_length=255)
