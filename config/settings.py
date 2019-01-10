@@ -125,6 +125,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 
 # Cross origin requests
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
@@ -132,7 +144,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # User model
 # https://wsvincent.com/django-rest-framework-user-authentication-tutorial/
 
-AUTH_USER_MODEL = 'accounts.User'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -152,3 +164,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+
+# Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
