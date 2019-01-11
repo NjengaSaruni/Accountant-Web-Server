@@ -3,7 +3,16 @@
 This repository contains the backend for the AccountantPlus web service. 
 
 ## How to run the server
-1. ### Without docker (Linux | Ubuntu)
+1. ### Without Docker
+    
+   Install docker and docker-compose
+   
+   Spin up a server instance
+   
+   ```
+   $ docker-compose up --build
+   ``` 
+2. ### Without docker (Linux | Ubuntu)
 
      
      $ git clone https://github.com/NjengaSaruni/Accountant-Web-Server.git
