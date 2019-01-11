@@ -9,3 +9,7 @@ RUN \
  apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
  python3 -m pip install -r requirements/base.txt --no-cache-dir && \
  apk --purge del .build-deps
+
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh

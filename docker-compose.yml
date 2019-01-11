@@ -8,6 +8,7 @@ services:
       - .:/code
     ports:
       - '80:80'
+    entrypoint: /entrypoint.sh
     depends_on:
       - db
 
