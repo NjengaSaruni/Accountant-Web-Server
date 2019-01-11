@@ -1,5 +1,6 @@
 # Accounts
 
+from accounts.models import *
 user = User.objects.first()
 
 # Testing
