@@ -104,10 +104,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ap',
-        'USER': 'app',
-        'PASSWORD': 'app',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'HOST': 'db',
         'PORT': 5432,
     }
@@ -149,7 +148,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
 # Cross origin requests
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', '0.0.0.0']
 CORS_ORIGIN_ALLOW_ALL = True
 # User model
 # https://wsvincent.com/django-rest-framework-user-authentication-tutorial/
