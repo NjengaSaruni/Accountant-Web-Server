@@ -1,16 +1,26 @@
 version: '3'
 
 services:
-  web:
+  django-apache2:
     build: .
-    command: python manage.py runserver 0.0.0.0:80
-    volumes:
-      - .:/code
+    container_name: django-apache2
     ports:
-      - '80:80'
-    entrypoint: /entrypoint.sh
-    depends_on:
-      - db
+    - '80:80'
+    - '3500:3500'
+    - '8006:81'
+    volumes:
+    - $PWD/www:/Accountant-Web-Server
+
+#  web:
+#    build: .
+#    command: python manage.py runserver 0.0.0.0:80
+#    volumes:
+#      - .:/code
+#    ports:
+#      - '80:80'
+#    entrypoint: /entrypoint.sh
+#    depends_on:
+#      - db
 
   db:
     image: postgres
