@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  web:
+  django_apache2:
     build: .
-    container_name: web
+    container_name: django_apache2
     entrypoint: /entrypoint.sh
     depends_on:
       - db
