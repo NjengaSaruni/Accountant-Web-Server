@@ -1,14 +1,25 @@
 FROM grahamdumpleton/mod-wsgi-docker:python-3.4-onbuild
 
-COPY requirements/base.txt /code/requirements./base.txt
-RUN python3 -m pip install -r requirements/base.txt
+RUN apt-get -y install python3-pip
+RUN ln /usr/bin/pip3 /usr/bin/pip
+RUN pip install --upgrade pip
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN mkdir /code
+
+COPY requirements/base.txt /code/requirements./base.txt
+
+WORKDIR /code
+COPY . /code/
+
+ENV PYTHONUNBUFFERED 1
 
 EXPOSE 80 3500
 
+RUN python3 -m pip install -r requirements/base.txt
+
 CMD [ "--working-directory", ".", \
-      "--url-alias", "/static", "/static", \
+      "--url-alias", "/static", "static", \
       "--application-type", "module", "config.wsgi" ]
+
+
 
