@@ -6,7 +6,7 @@ services:
     container_name: web
     entrypoint: /entrypoint.sh
     ports:
-    - '9999:80'
+    - '80:80'
 
 #  web:
 #    build: .
