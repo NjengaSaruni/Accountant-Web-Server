@@ -9,6 +9,8 @@ services:
       - db
     ports:
     - '80:80'
+    - '3500:3500'
+    - '8006:81'
 
 #  web:
 #    build: .
