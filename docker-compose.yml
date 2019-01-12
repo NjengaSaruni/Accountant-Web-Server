@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  django-apache2:
+  web:
     build: .
     container_name: django-apache2
     ports:
-    - '8001:80'
+    - '80:80'
     - '3500:3500'
     - '8006:81'
 
