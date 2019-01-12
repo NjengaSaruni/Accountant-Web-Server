@@ -5,6 +5,8 @@ services:
     build: .
     container_name: web
     entrypoint: /entrypoint.sh
+    depends_on:
+      - db
     ports:
     - '80:80'
 
