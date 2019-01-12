@@ -1,9 +1,5 @@
 FROM grahamdumpleton/mod-wsgi-docker:python-3.4-onbuild
 
-RUN apt-get -y install python3-pip
-RUN ln /usr/bin/pip3 /usr/bin/pip
-RUN pip install --upgrade pip
-
 RUN mkdir /code
 
 COPY requirements/base.txt /code/requirements./base.txt
