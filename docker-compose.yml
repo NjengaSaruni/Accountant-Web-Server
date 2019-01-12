@@ -4,7 +4,7 @@ services:
   django_apache2:
     build: .
     container_name: django_apache2
-    entrypoint: /entrypoint.sh
+#    entrypoint: /entrypoint.sh
     depends_on:
       - db
     ports:
