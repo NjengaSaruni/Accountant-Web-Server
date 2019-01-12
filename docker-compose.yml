@@ -4,10 +4,9 @@ services:
   web:
     build: .
     container_name: web
+    entrypoint: /entrypoint.sh
     ports:
-    - '80:80'
-    - '3500:3500'
-    - '8006:81'
+    - '9999:80'
 
 #  web:
 #    build: .
