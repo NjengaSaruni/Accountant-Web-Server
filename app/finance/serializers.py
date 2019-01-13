@@ -1,9 +1,10 @@
 from rest_framework import serializers
 
+from app.core.mixins import CreateUpdateMixin
 from app.finance.models import Account, Tag, Transaction
 
 
-class AccountSerializer(serializers.ModelSerializer):
+class AccountSerializer(CreateUpdateMixin, serializers.ModelSerializer):
 
     class Meta:
         model = Account
