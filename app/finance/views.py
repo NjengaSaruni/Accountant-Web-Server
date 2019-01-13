@@ -32,4 +32,3 @@ class TagListCreateView(generics.ListCreateAPIView):
 class TagDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TagSerializer
     queryset = Tag.objects.all()
-
