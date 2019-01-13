@@ -7,7 +7,8 @@ class Account(AbstractBase):
     balance = models.DecimalField(
         blank=True,
         default=0,
-        decimal_places=2
+        decimal_places=2,
+        max_digits=100
     )
     name = models.CharField(
         max_length=255,
@@ -52,15 +53,20 @@ class Transaction(AbstractBase):
     amount = models.DecimalField(
         blank=True,
         default=0,
-        decimal_places=2
+        decimal_places=2,
+        max_digits=100
     )
     description = models.TextField()
     account = models.ForeignKey(
         Account,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name='transactions'
     )
     tag = models.ForeignKey(
         Tag,
+        on_delete=models.PROTECT,
         related_name='transactions'
     )
 
