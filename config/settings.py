@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     # Local apps
     'app.accounts.apps.AccountantApiConfig',
     'app.api',
+    'app.finance'
 ]
 
 MIDDLEWARE = [
@@ -92,25 +93,25 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 #
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'ap',
-#         'USER': 'app',
-#         'PASSWORD': 'app',
-#         'HOST': 'localhost',
-#         'PORT': 5432,
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ap',
+        'USER': 'app',
+        'PASSWORD': 'app',
+        'HOST': 'localhost',
         'PORT': 5432,
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'HOST': 'db',
+#         'PORT': 5432,
+#     }
+# }
 
 if 'test' in sys.argv:
     DATABASES['default'] = {

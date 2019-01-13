@@ -1,9 +1,12 @@
 version: '3'
 
 services:
-  web:
+  django_apache2:
     build: .
-    container_name: web
+    container_name: django_apache2
+#    entrypoint: /entrypoint.sh
+    depends_on:
+      - db
     ports:
     - '80:80'
     - '3500:3500'
