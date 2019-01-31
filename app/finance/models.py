@@ -38,6 +38,10 @@ class Tag(AbstractBase):
         blank=True,
     )
 
+    def clean(self):
+        # All tag names should be capitalized
+        self.name = self.name.upper()
+
     class Meta:
         app_label = 'finance'
         unique_together = (
@@ -74,4 +78,8 @@ class Transaction(AbstractBase):
         app_label = 'finance'
 
     def __str__(self):
-        return '%s - %s - %s' % (self.account.name, self.tag.name, self.amount)
+        return '%s - %s - %s' % (
+            self.account.name,
+            self.tag.name,
+            self.amount
+        )

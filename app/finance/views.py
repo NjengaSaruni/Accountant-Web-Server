@@ -1,7 +1,7 @@
 from rest_framework import generics
 
 from app.finance.models import Account, Transaction, Tag
-from app.finance.serializers import AccountSerializer, TransactionSerializer, TagSerializer
+from app.finance.serializers import AccountSerializer, TransactionSerializer, TagSerializer, TransactionListSerializer
 
 
 class AccountListCreateView(generics.ListCreateAPIView):
@@ -15,8 +15,12 @@ class AccountDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class TransactionListCreateView(generics.ListCreateAPIView):
-    serializer_class = TransactionSerializer
     queryset = Transaction.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return TransactionListSerializer
+        return TransactionSerializer
 
 
 class TransactionDetailView(generics.RetrieveUpdateDestroyAPIView):
