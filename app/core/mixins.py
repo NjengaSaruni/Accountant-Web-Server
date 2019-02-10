@@ -1,7 +1,10 @@
-class CreateUpdateMixin(object):
+from app.accounts.models import User
 
-    def create(self, validated_data):
-        if 'created_by' not in self.context['request'].POST:
-            validated_data['created_by'] = self.context['request'].user
+class CreatorUpdaterMixin(object):
 
-        return super(CreateUpdateMixin, self).create(validated_data)
+    def create(self, request, *args, **kwargs):
+        if 'created_by' not in request.data:
+            user = User.objects.first()
+            request.data['created_by'] = user.id
+
+        return super(CreatorUpdaterMixin, self).create(request, args, kwargs)

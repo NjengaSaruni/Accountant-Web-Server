@@ -1,16 +1,15 @@
 from rest_framework import serializers
 
-from app.core.mixins import CreateUpdateMixin
 from app.finance.models import Account, Tag, Transaction
 
 
-class AccountSerializer(CreateUpdateMixin, serializers.ModelSerializer):
+class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = '__all__'
 
 
-class TagSerializer(CreateUpdateMixin, serializers.ModelSerializer):
+class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = '__all__'
@@ -23,14 +22,15 @@ class TagInlineSerializer(serializers.ModelSerializer):
 
 
 class TransactionListSerializer(serializers.HyperlinkedModelSerializer):
-    tag = TagInlineSerializer(read_only=Tag)
+    tag = TagInlineSerializer(read_only=True)
 
     class Meta:
         model = Transaction
-        fields = ('id', 'tag', 'amount', 'description')
+        fields = ('id', 'tag', 'amount', 'description', 'created_at')
 
 
-class TransactionSerializer(CreateUpdateMixin, serializers.ModelSerializer):
+class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = '__all__'
+
