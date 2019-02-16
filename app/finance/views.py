@@ -1,6 +1,5 @@
 from uuid import UUID
 
-import django_filters
 from django.utils import timezone
 from rest_framework import generics
 
@@ -50,6 +49,19 @@ class TransactionListCreateView(CreatorUpdaterMixin, generics.ListCreateAPIView)
             self.request.data['tag'] = tag.id
 
         return super(TransactionListCreateView, self).create(request)
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        try:
+            response.data['tag'] = {
+                'id': response.data['tag'],
+                'name': Tag.objects.get(id=response.data['tag']).name
+            }
+
+        except TypeError:
+            # Type error will be thrown for lists, which already have correct data
+            pass
+
+        return super(TransactionListCreateView, self).finalize_response(request, response, args, kwargs)
 
     def get_serializer_class(self):
         if self.request.method == 'GET':

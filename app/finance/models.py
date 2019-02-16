@@ -98,7 +98,7 @@ class Transaction(AbstractBase):
 
     class Meta:
         app_label = 'finance'
-        ordering = ('-created_at',)
+        ordering = ('-transaction_date',)
 
     def __str__(self):
         return '%s - %s - %s' % (
