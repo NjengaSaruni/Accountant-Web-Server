@@ -54,7 +54,13 @@ class Tag(AbstractBase):
 
 
 class Transaction(AbstractBase):
+    """
+    This is the most import table in this project.
+    All other reports rely on this table as the absolute source of truth.
+    All reports are generated from processing of data from this table.
+    """
     amount = models.DecimalField(
+        help_text='Negative amounts indicate expenses, positive indicate income',
         blank=True,
         default=0,
         decimal_places=2,
@@ -70,12 +76,29 @@ class Transaction(AbstractBase):
     )
     tag = models.ForeignKey(
         Tag,
+        help_text='The associated tag, important for grouping similar '
+                  'transactions for better reporting',
         on_delete=models.PROTECT,
         related_name='transactions'
+    )
+    transaction_date = models.DateTimeField(
+        help_text='Transaction date and time could be set to be different '
+                  'from the date and time of creation of record in the '
+                  'database.',
+        auto_now_add=True,
+        null=False,
+        blank=False
+    )
+    deleted = models.BooleanField(
+        help_text='If this transaction will be factored in in reports',
+        default=False,
+        null=False,
+        blank=False
     )
 
     class Meta:
         app_label = 'finance'
+        ordering = ('-created_at',)
 
     def __str__(self):
         return '%s - %s - %s' % (
