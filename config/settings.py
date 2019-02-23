@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'phonenumber_field',
     'corsheaders',
+    'rest_framework_swagger',
 
     # Local apps
     'app.accounts.apps.AccountantApiConfig',
