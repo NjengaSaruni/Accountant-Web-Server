@@ -149,7 +149,14 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
 # Cross origin requests
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', '0.0.0.0', '34.73.10.53']
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'testserver',
+    '0.0.0.0',
+    '34.73.10.53',
+    'api.isave.co.ke'
+]
 CORS_ORIGIN_ALLOW_ALL = True
 # User model
 # https://wsvincent.com/django-rest-framework-user-authentication-tutorial/

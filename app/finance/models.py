@@ -39,8 +39,14 @@ class Tag(AbstractBase):
     )
 
     def clean(self):
-        # All tag names should be capitalized
-        self.name = self.name.upper()
+        # All tag names should be in lower case
+        self.name = self.name.lower()
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.name = self.name.lower()
+
+        super(Tag, self).save()
 
     class Meta:
         app_label = 'finance'
