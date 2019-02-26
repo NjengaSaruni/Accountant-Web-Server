@@ -8,3 +8,10 @@ class CreatorUpdaterMixin(object):
             request.data['created_by'] = user.id
 
         return super(CreatorUpdaterMixin, self).create(request, args, kwargs)
+
+class GetQuerysetMixin(object):
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super(GetQuerysetMixin, self).get_queryset()
+        print(self.request.user)
+        return queryset.filter(created_by=self.request.user)

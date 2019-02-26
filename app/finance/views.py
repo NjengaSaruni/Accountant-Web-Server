@@ -4,7 +4,7 @@ from django.utils import timezone
 from rest_framework import generics
 
 from app.accounts.models import User
-from app.core.mixins import CreatorUpdaterMixin
+from app.core.mixins import CreatorUpdaterMixin, GetQuerysetMixin
 from app.finance.filters import TransactionFilter
 from app.finance.models import Account, Transaction, Tag
 from app.finance.serializers import AccountSerializer, TransactionSerializer, TagSerializer, TransactionListSerializer
@@ -20,7 +20,7 @@ class AccountDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Account.objects.all()
 
 
-class TransactionListCreateView(CreatorUpdaterMixin, generics.ListCreateAPIView):
+class TransactionListCreateView(CreatorUpdaterMixin, GetQuerysetMixin, generics.ListCreateAPIView):
     queryset = Transaction.objects.all()
     filter_class = TransactionFilter()
 
@@ -57,7 +57,7 @@ class TransactionListCreateView(CreatorUpdaterMixin, generics.ListCreateAPIView)
                 'name': Tag.objects.get(id=response.data['tag']).name
             }
 
-        except TypeError:
+        except:
             # Type error will be thrown for lists, which already have correct data
             pass
 
