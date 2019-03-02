@@ -18,7 +18,7 @@ from app.accounts.models import User
 from app.finance.models import Tag, Transaction
 
 if __name__ == '__main__':
-    user = User.objects.first()
+    user = User.objects.get(email='peternjengask@gmail.com')
 
     with open('transactions.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')

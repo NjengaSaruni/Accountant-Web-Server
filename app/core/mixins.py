@@ -4,8 +4,7 @@ class CreatorUpdaterMixin(object):
 
     def create(self, request, *args, **kwargs):
         if 'created_by' not in request.data:
-            user = User.objects.first()
-            request.data['created_by'] = user.id
+            request.data['created_by'] = request.user.id
 
         return super(CreatorUpdaterMixin, self).create(request, args, kwargs)
 
