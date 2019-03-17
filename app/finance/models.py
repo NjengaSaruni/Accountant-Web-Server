@@ -1,5 +1,6 @@
 from django.db import models
 
+from app.core.helpers import random_color
 from app.core.models import AbstractBase
 
 
@@ -36,6 +37,12 @@ class Tag(AbstractBase):
     description = models.TextField(
         null=True,
         blank=True,
+    )
+    color = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True,
+        default=random_color
     )
 
     def clean(self):
