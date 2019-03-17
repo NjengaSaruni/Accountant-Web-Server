@@ -6,7 +6,8 @@ from rest_framework import generics
 from app.core.mixins import CreatorUpdaterMixin, GetQuerysetMixin
 from app.finance.filters import TransactionFilter
 from app.finance.models import Account, Transaction, Tag
-from app.finance.serializers import AccountSerializer, TransactionSerializer, TagSerializer, TransactionListSerializer
+from app.finance.serializers import AccountSerializer, TransactionSerializer, TagSerializer, TransactionListSerializer, \
+    TagInlineSerializer
 
 
 class AccountListCreateView(generics.ListCreateAPIView):
@@ -50,11 +51,9 @@ class TransactionListCreateView(CreatorUpdaterMixin, GetQuerysetMixin, generics.
 
     def finalize_response(self, request, response, *args, **kwargs):
         try:
-            response.data['tag'] = {
-                'id': response.data['tag'],
-                'name': Tag.objects.get(id=response.data['tag']).name
-            }
-
+            tag = Tag.objects.get(id=response.data['tag'])
+            serialized_tag = TagInlineSerializer(tag)
+            response.data['tag'] = serialized_tag.data
         except:
             # Type error will be thrown for lists, which already have correct data
             pass

@@ -18,7 +18,7 @@ class TagSerializer(serializers.ModelSerializer):
 class TagInlineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'color')
 
 
 class TransactionListSerializer(serializers.HyperlinkedModelSerializer):
