@@ -48,8 +48,8 @@ class AccountViewsTestCase(TestCase):
         User.objects.create(first_name='Agnes', last_name='Nzani', password=make_password('this!@#'), email='agnesnzani@gmail.com')
 
         response = self.client.post('/api/v1/rest-auth/login/', {
-            'username': 'agnesnzani@gmail.com',
+            'email': 'agnesnzani@gmail.com',
             'password': 'this!@#'
         })
-
+        
         self.assertEqual(response.status_code, 200)
