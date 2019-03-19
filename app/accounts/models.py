@@ -26,7 +26,10 @@ class User(AbstractUser):
         null=True,
         blank=True
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text='The time the transaction was done.'
+    )
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
