@@ -191,8 +191,17 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
-    ),
-    # 'DEFAULT_FILTER_BACKENDS': (
-    #     'django_filters.rest_framework.DjangoFilterBackend',
-    # )
+    )
+}
+
+SWAGGER_SETTINGS = {
+    'SHOW_REQUEST_HEADERS': True,
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    }
 }
