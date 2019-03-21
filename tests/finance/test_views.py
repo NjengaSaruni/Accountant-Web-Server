@@ -14,3 +14,12 @@ class FinanceViewsTestCase(BaseTestClass):
             content_type='application/json'
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED) 
+
+    def test_get_transactions(self):
+        token = self.authenticate()
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token)
+        response = self.client.get(
+            self.transactions_url,
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK) 
