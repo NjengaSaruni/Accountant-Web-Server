@@ -10,16 +10,11 @@ class BaseTestClass(APITestCase):
         self.client = APIClient()
         self.login_url = '/api/v1/rest-auth/login/'
         self.transactions_url = '/api/v1/account/transactions/'
-        self.tag_url = '/api/v1/account/tags/'
         self.transaction_data = {
-            'amount': 4000,
-            'description': 'description',
-            'account': 'salary',
-            'tag': 'income'
-        }
-        self.tag_data = {
-            'name': 'tag'
-        }
+            "amount": 100,
+            "description": "string",
+            "tag": "tag"
+            }
     
     def authenticate(self):
         User.objects.create(
