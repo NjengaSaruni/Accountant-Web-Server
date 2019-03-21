@@ -1,5 +1,4 @@
-# AccountantPlus Web Server
-
+# AccountantPlus Web Server [![Build Status](https://travis-ci.org/NjengaSaruni/Accountant-Web-Server.svg?branch=develop)](https://travis-ci.org/NjengaSaruni/Accountant-Web-Server) [![Coverage Status](https://coveralls.io/repos/github/NjengaSaruni/Accountant-Web-Server/badge.svg?branch=develop)](https://coveralls.io/github/NjengaSaruni/Accountant-Web-Server?branch=develop)
 This repository contains the backend for the AccountantPlus web service. 
 
 ## How to run the server
