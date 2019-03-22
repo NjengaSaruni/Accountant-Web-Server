@@ -119,3 +119,45 @@ class Transaction(AbstractBase):
             self.tag.name,
             self.amount
         )
+
+
+class Limit(AbstractBase):
+    tag = models.ForeignKey(
+        Tag,
+        help_text='The tag whose limit is being added',
+        on_delete=models.PROTECT,
+        related_name='limits'
+    )
+
+    amount = models.DecimalField(
+        help_text='The maximum amount allowed for this tag',
+        blank=True,
+        default=0,
+        decimal_places=2,
+        max_digits=100
+    )
+
+    start_date = models.DateTimeField(
+        help_text='The day from which transactions under this tag will count'
+                  'in the limit.',
+        auto_now_add=True,
+        null=False,
+        blank=True
+    )
+
+    end_date = models.DateTimeField(
+        help_text='The end date for this limit.',
+        auto_now_add=True,
+        null=False,
+        blank=True
+    )
+
+    def __str__(self):
+        return '%s - %s - %s - %s' % (
+            self.tag.name,
+            self.start_date.date(),
+            self.end_date.date(),
+            self.amount
+        )
+
+
