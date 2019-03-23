@@ -49,7 +49,8 @@ class User(AbstractUser):
 
     @property
     def full_name(self):
-        return self.get_full_name()
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name.strip()
 
     def __str__(self):
         return '%s %s - %s' % (self.first_name, self.last_name, self.email)

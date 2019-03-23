@@ -1,4 +1,7 @@
+import datetime
+
 from django.db import models
+from django.utils import timezone
 
 from app.core.helpers import random_color
 from app.core.models import AbstractBase
@@ -63,7 +66,7 @@ class Tag(AbstractBase):
         )
 
     def __str__(self):
-        return '%s - %s' % (self.created_by.full_name, self.name)
+        return '%s - %s' % (self.created_by.email, self.name)
 
 
 class Transaction(AbstractBase):
@@ -121,6 +124,22 @@ class Transaction(AbstractBase):
         )
 
 
+def get_start_of_month(date=None):
+    if date is None:
+        date = datetime.datetime.now()
+
+    date = date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    return date
+
+
+def get_end_of_month(date=None):
+    if date is None:
+        date = datetime.datetime.now()
+
+    next_month = date.replace(day=28) + datetime.timedelta(days=4)
+    return next_month - datetime.timedelta(days=next_month.day)
+
+
 class Limit(AbstractBase):
     tag = models.ForeignKey(
         Tag,
@@ -140,24 +159,23 @@ class Limit(AbstractBase):
     start_date = models.DateTimeField(
         help_text='The day from which transactions under this tag will count'
                   'in the limit.',
-        auto_now_add=True,
+        default=get_start_of_month,
         null=False,
         blank=True
     )
 
     end_date = models.DateTimeField(
         help_text='The end date for this limit.',
-        auto_now_add=True,
+        default=get_end_of_month,
         null=False,
         blank=True
     )
 
     def __str__(self):
-        return '%s - %s - %s - %s' % (
+        return '%s - %s - %s - %s - %s' % (
+            self.created_by.email,
             self.tag.name,
             self.start_date.date(),
             self.end_date.date(),
             self.amount
         )
-
-

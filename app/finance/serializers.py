@@ -41,7 +41,7 @@ class LimitListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Limit
-        fields = ('id', 'tag', 'amount', 'description', 'created_at', 'start_date', 'end_date')
+        fields = ('id', 'tag', 'amount', 'created_at', 'start_date', 'end_date')
 
 
 class LimitSerializer(serializers.ModelSerializer):
