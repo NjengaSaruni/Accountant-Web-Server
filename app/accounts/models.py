@@ -12,7 +12,7 @@ from django.contrib.auth.hashers import make_password
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, phone_number=None, email=None,password=None):
+    def create_user(self, phone_number=None, email=None, password=None):
         pass_hash = make_password(password)
         user = self.model(
             email=email,
@@ -32,6 +32,7 @@ class CustomUserManager(BaseUserManager):
         user.is_staff = True
         user.save()
         return user
+
 
 class User(AbstractUser):
     id = models.UUIDField(
@@ -71,7 +72,10 @@ class User(AbstractUser):
         if not self.updated_at:
             self.updated_at = timezone.now()
         if not self.username:
-            self.username = self.email or self.phone_number
+            if self.phone_number is None:
+                self.username = self.email
+            else:
+                self.username = self.phone_number
         if self.phone_number is not None and not self.phone_number.is_valid():
             raise ValidationError(_('Invalid phone number.'))
         if self.email:

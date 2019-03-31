@@ -7,7 +7,8 @@ from rest_framework.renderers import JSONRenderer
 from app.accounts.models import User
 from app.accounts.serializers import (
     UserSerializer,
-    RegistrationSerializer
+    RegistrationSerializer,
+    LoginSerializer
 )
 
 
@@ -30,10 +31,22 @@ class RegistrationView(generics.CreateAPIView):
         payload = request.data
         if payload.get('email') is None and payload.get('phone_number') is None:
             msg = {
-                'error':'Please provide an email or phonenumber to register.'
+                'error': 'Please provide an email or phonenumber to register.'
             }
             return Response(msg, status=status.HTTP_400_BAD_REQUEST)
         serializer = self.serializer_class(data=payload)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class LoginView(generics.CreateAPIView):
+    permission_classes = (AllowAny,)
+    renderer_classes = (JSONRenderer,)
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        user = request.data
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
