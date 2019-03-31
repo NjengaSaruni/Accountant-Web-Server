@@ -5,13 +5,18 @@ from app.accounts.models import User
 
 class UserModelTestCase(TestCase):
     def setUp(self):
-        User.objects.create(first_name='James', last_name='Njenga', password='this!@#', email='jamesnjenga@gmail.com')
-        User.objects.create(first_name='Agnes', last_name='Nzani', password='this!@#', email='agnesnzani@gmail.com')
+        User.objects.create(first_name='James', last_name='Njenga',
+                            password='this!@#', email='jamesnjenga@gmail.com')
+        User.objects.create(first_name='Agnes', last_name='Nzani',
+                            password='this!@#', email='agnesnzani@gmail.com')
+        User.objects.create_superuser(
+            password='this!@#tet', email='agnesddddnzani@gmail.com')
 
     def test_user_string_formating(self):
         james = User.objects.get(email='jamesnjenga@gmail.com')
 
-        self.assertEqual(james.__str__(), '%s %s - %s' % (james.first_name, james.last_name, james.email))
+        self.assertEqual(james.__str__(), '%s %s - %s' %
+                         (james.first_name, james.last_name, james.email))
 
     def test_users_have_full_names(self):
         """
