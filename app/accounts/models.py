@@ -7,7 +7,31 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from django.core.validators import validate_email
+from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.hashers import make_password
 
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, phone_number=None, email=None,password=None):
+        pass_hash = make_password(password)
+        user = self.model(
+            email=email,
+            phone_number=phone_number,
+            password=pass_hash
+        )
+        user.save()
+        return user
+
+    def create_superuser(self, email, password):
+        pass_hash = make_password(password)
+        user = self.model(
+            email=email, password=pass_hash
+        )
+        user.active = True
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
+        return user
 
 class User(AbstractUser):
     id = models.UUIDField(
@@ -22,15 +46,24 @@ class User(AbstractUser):
         max_length=255
     )
     last_name = models.CharField(max_length=255)
+    email = models.EmailField(
+        max_length=40,
+        null=True,
+        blank=True,
+        unique=True,
+
+    )
     phone_number = PhoneNumberField(
         null=True,
-        blank=True
+        blank=True,
+        unique=True
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
         help_text='The time the transaction was done.'
     )
     updated_at = models.DateTimeField(auto_now=True)
+    objects = CustomUserManager()
 
     def save(self, *args, **kwargs):
         if not self.created_at:
@@ -38,13 +71,11 @@ class User(AbstractUser):
         if not self.updated_at:
             self.updated_at = timezone.now()
         if not self.username:
-            self.username = self.email
+            self.username = self.email or self.phone_number
         if self.phone_number is not None and not self.phone_number.is_valid():
             raise ValidationError(_('Invalid phone number.'))
-
         if self.email:
             validate_email(self.email)
-
         return super(User, self).save()
 
     @property
