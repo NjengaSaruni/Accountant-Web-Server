@@ -84,3 +84,4 @@ venv/
 static/
 
 .vscode/
+*.csv
