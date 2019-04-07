@@ -40,7 +40,7 @@ class RegistrationView(generics.CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-class LoginView(generics.CreateAPIView):
+class LoginView(generics.GenericAPIView):
     permission_classes = (AllowAny,)
     renderer_classes = (JSONRenderer,)
     serializer_class = LoginSerializer
