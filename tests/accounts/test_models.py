@@ -5,7 +5,7 @@ from app.accounts.models import User
 
 class UserModelTestCase(TestCase):
     def setUp(self):
-        User.objects.create(first_name='James', last_name='Njenga',
+        self.user = User.objects.create(first_name='James', last_name='Njenga',
                             password='this!@#', email='jamesnjenga@gmail.com')
         User.objects.create(first_name='Agnes', last_name='Nzani',
                             password='this!@#', email='agnesnzani@gmail.com')
