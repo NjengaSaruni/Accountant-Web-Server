@@ -180,20 +180,25 @@ class Limit(AbstractBase):
             self.amount
         )
 
-# class Budget(AbstractBase):
-#     tag = models.ForeignKey(
-#         Tag,
-#         help_text='The tag whose budget is being added',
-#         on_delete=models.PROTECT,
-#         related_name='budgets'
-#     )
-#
-#     amount = models.DecimalField(
-#         help_text='The maximum amount allowed for this tag',
-#         blank=True,
-#         default=0,
-#         decimal_places=2,
-#         max_digits=100
-#     )
-#
-#     overflow = models.Dece
+
+class Budget(AbstractBase):
+    tag = models.ForeignKey(
+        Tag,
+        help_text='The tag whose budget is being added',
+        on_delete=models.PROTECT,
+        related_name='budgets'
+    )
+
+    amount = models.DecimalField(
+        blank=True,
+        default=0,
+        decimal_places=2,
+        max_digits=100,
+        help_text='The maximum amount allowed for the tag in this m',
+    )
+
+    overflow = models.BooleanField(
+        blank=True,
+        default=False,
+        help_text='Whether the budget remains will overflow into the next cycle.'
+    )
