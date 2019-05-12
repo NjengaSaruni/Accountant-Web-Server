@@ -11,6 +11,9 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+from manage import read_env
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'config.settings'
 
+read_env()
 application = get_wsgi_application()
