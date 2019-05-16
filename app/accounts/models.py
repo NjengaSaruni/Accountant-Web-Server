@@ -31,7 +31,6 @@ class CustomUserManager(BaseUserManager):
         user.is_superuser = True
         user.is_staff = True
         user.save()
-        return super(CustomUserManager, self).create(email=email, password=password, **kwargs)
 
 
 class User(AbstractUser):
