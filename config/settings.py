@@ -141,7 +141,7 @@ ALLOWED_HOSTS = [
     'localhost',
     'testserver',
     '0.0.0.0',
-    '34.76.64.40',
+    '35.240.73.13',
     'api.isave.co.ke'
 ]
 CORS_ORIGIN_ALLOW_ALL = True
